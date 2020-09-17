@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Tracalorie</h1>
+            <div class="clear-all-wrapper">
+                <button type="button" class="clear-all">Clear all</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="main-wrapper">
+                <section class="input-info">
+                    <h2>Add Meal / Food Item</h2>
+                    <form>
+                        <div class="form-control">
+                            <label for="meal">Meal</label>
+                            <input type="text" id="meal" placeholder="Add Item">
+                        </div>
+                        <div class="form-control">
+                            <label for="calories">Calories</label>
+                            <input type="number" id="calories" placeholder="Add Calories">
+                        </div>
+
+                        <div class="form-btn">
+                            <button type="button" class="btn-left add-meal-btn"><i class="fa fa-plus"></i> Add
+                                Meal</button>
+                            <!-- <button type="button" class="btn-right back-btn"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Back</button> -->
+                        </div>
+                    </form>
+                </section>
+
+                <section id="calories-info">
+                    <h2>Total Calories: 0</h2>
+                    <ul class="overview">
+                    </ul>
+                </section>
+            </div>
+
+
+
+        </main>
+
+
+    </div>
+
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
