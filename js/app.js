@@ -24,4 +24,26 @@ addMeal.addEventListener('click', () => {
         ui.caloriesCount(calories);
         // storage.saveItem(ui);
     }
+
+    const editItem = document.querySelectorAll('.edit-item');
+    editItem.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.classList.contains('edit-item')) {
+                // Init UI constructor
+                const ui = new UI();
+
+                const id = ui.editItem(e.target);
+
+                const updateButton = document.querySelector('.update-meal-btn');
+                updateButton.addEventListener('click', () => {
+                    ui.hideButtons();
+                    ui.updateItem(id);
+                })
+            }
+
+
+        })
+    })
+
+
 });

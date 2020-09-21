@@ -131,6 +131,15 @@ input::placeholder {
     background-color: #1565c0;
 }
 
+.update-meal-btn {
+    background-color: #ff9800;
+    margin-right: .5rem;
+}
+
+.delete-meal-btn {
+    background-color: #F44336;
+}
+
 .back-btn {
     background-color: #9e9e9e;
 }

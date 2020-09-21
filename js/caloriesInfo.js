@@ -14,3 +14,4 @@ const CaloriesInfo = function (meal, calories) {
         return id;
     };
 }
+
