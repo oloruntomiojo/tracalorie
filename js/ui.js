@@ -1,28 +1,16 @@
 const UI = function (meal, calories) {
     this.meal = meal;
     this.calories = calories;
-    this.id = parseFloat(Math.random() * 100).toFixed(4);
 }
 
 UI.prototype = {
     // Display all data
-    displayCaloriesInfo: function (meal, calories, id) {
+    displayCaloriesInfo: function (id) { 
         let overview = document.querySelector('.overview');
-        let listItems = [...overview.children];      
-
-        // check if random id already exists, randomise again if so
-        listItems.forEach(item => {
-            while(item.classList.contains(this.id)) {
-                this.id = parseFloat(Math.random() * 100).toFixed(4);
-            }
-        })
+        
         // append calories information
             overview.innerHTML += `
-                <li class="item-${this.id}"><strong>${this.meal}</strong> : <em>${this.calories} Calories</em> <a href="#"><i class="fa fa-pencil"></i></a></li>`;
-
-            this.caloriesCount(this.calories);
-
-            this.clearInputFields();
+                <li class="item-${id}"><strong>${this.meal}</strong> : <em>${this.calories} Calories</em> <a href="#"><i class="fa fa-pencil"></i></a></li>`;
     },
 
     // Clear form fields

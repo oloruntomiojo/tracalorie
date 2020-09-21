@@ -1,11 +1,15 @@
 // Init Storage
 const storage = new Storage();
-console.log(storage.retrieveItem());
+// storage.displayItems();
+
 
 const addMeal = document.querySelector('.add-meal-btn');
 addMeal.addEventListener('click', () => {
     const meal = document.getElementById('meal').value;
     const calories = document.getElementById('calories').value;
+
+    // Init CaloriesInfo Constructor
+    const caloriesInfo = new CaloriesInfo(meal, calories);
 
     // Init UI constructor
     const ui = new UI(meal, calories);
@@ -13,9 +17,11 @@ addMeal.addEventListener('click', () => {
     if (meal === '' || calories === '') {
         ui.showAlert('error', 'Please fill all fields');
     } else {
-        ui.displayCaloriesInfo();
+        const id = caloriesInfo.id();
+        ui.displayCaloriesInfo(id);
         ui.showAlert('', '');
-        storage.saveItem(ui);
+        ui.clearInputFields();
+        ui.caloriesCount(calories);
+        // storage.saveItem(ui);
     }
-
 });
