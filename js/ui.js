@@ -86,18 +86,18 @@ UI.prototype = {
         listItems = [...listItems.children];
 
         listItems.forEach(item => {
-            if (item.className.match(id)) {
+            if (item.getAttribute('id') === id) {
                 // update total calories
                 let totalCalories = document.querySelector('.total-calories');
                 totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent);
-                // delete meal
+
+                // delete meal item;
                 item.remove();
+
+                this.clearInputFields();
+                this.hideButtons();
             }
         })
-
-        this.clearInputFields();
-        this.hideButtons();
-
     },
 
     hideButtons: function () {

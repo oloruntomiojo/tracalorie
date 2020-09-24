@@ -2,7 +2,6 @@
 const storage = new Storage();
 // storage.displayItems();
 
-
 // Add Meal Event
 const addMeal = document.querySelector('.add-meal-btn');
 addMeal.addEventListener('click', addMealEvent);
@@ -21,9 +20,24 @@ const updateButton = document.querySelector('.update-meal-btn');
 updateButton.addEventListener('click', () => {
     const ui = new UI();
     ui.updateItem(id);
-    
 })
 
+// Delete Items Event
+const deleteButton = document.querySelector('.delete-meal-btn');
+deleteButton.addEventListener('click', () => {
+    const ui = new UI();
+    ui.deleteItems(id);
+})
+
+// Back Items
+const backButton = document.querySelector('.back-btn');
+backButton.addEventListener('click', () => {
+    const ui = new UI();
+    ui.clearInputFields();
+    ui.hideButtons();
+})
+
+// Clear All Items Event
 const clearAll = document.querySelector('.clear-all');
 clearAll.addEventListener('click', () => {
     const ui = new UI;
