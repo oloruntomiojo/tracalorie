@@ -101,6 +101,10 @@ UI.prototype = {
                 const meal = document.getElementById('meal').value;
                 const calories = document.getElementById('calories').value;
 
+                // update total calories
+                let totalCalories = document.querySelector('.total-calories');
+                totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent) + parseInt(calories);
+
                 // update item in list
                 item.firstElementChild.textContent = meal;
                 item.firstElementChild.nextElementSibling.textContent = `${calories} Calories`;
@@ -109,6 +113,26 @@ UI.prototype = {
 
         this.clearInputFields();
         this.hideButtons();
+    },
+
+    deleteItems: function (id) {
+        let listItems = document.querySelector('.overview');
+
+        listItems = [...listItems.children];
+
+        listItems.forEach(item => {
+            if (item.className.match(id)) {
+                // update total calories
+                let totalCalories = document.querySelector('.total-calories');
+                totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent);
+                // delete meal
+                item.remove();
+            }
+        })
+
+        this.clearInputFields();
+        this.hideButtons();
+
     },
 
     hideButtons: function () {
@@ -122,5 +146,6 @@ UI.prototype = {
 
         const addButton = document.querySelector('.add-meal-btn');
         addButton.style.display = 'block';
-    }
+    },
+
 }
