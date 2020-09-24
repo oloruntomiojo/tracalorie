@@ -131,6 +131,10 @@ input::placeholder {
     background-color: #1565c0;
 }
 
+.form-btn.hide .add-meal-btn {
+    display: none;
+}
+
 .update-meal-btn {
     background-color: #ff9800;
     margin-right: .5rem;
@@ -142,6 +146,14 @@ input::placeholder {
 
 .back-btn {
     background-color: #9e9e9e;
+}
+
+.form-btn .btn {
+    display: none;
+}
+
+.form-btn.show .btn {
+    display: block;
 }
 
 .btn-right {

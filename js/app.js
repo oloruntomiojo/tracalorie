@@ -3,46 +3,26 @@ const storage = new Storage();
 // storage.displayItems();
 
 
+// Add Meal Event
 const addMeal = document.querySelector('.add-meal-btn');
-addMeal.addEventListener('click', () => {
-    addMealEvent()
+addMeal.addEventListener('click', addMealEvent);
 
+let id;
 
-    const editItem = document.querySelectorAll('.edit-item');
-    editItem.forEach(item => {
-        item.addEventListener('click', (e) => {
-            if (e.target.classList.contains('edit-item')) {
-                // Init UI constructor
-                const ui = new UI();
+// Edit Items Event
+const listItems = document.querySelector('.overview')
+listItems.addEventListener('click', (e) => {
+    const ui = new UI();
+    id = ui.editItem(e.target);
+})
 
-                const id = ui.editItem(e.target);
-
-                // update meal event
-                const updateButton = document.querySelector('.update-meal-btn');
-                updateButton.addEventListener('click', () => {
-                    ui.hideButtons();
-                    ui.updateItem(id);
-                })
-                
-                // delete meal event
-                const deleteButton = document.querySelector('.delete-meal-btn');
-                deleteButton.addEventListener('click', () => {
-                    ui.hideButtons();
-                    ui.deleteItems(id);
-                })
-
-                // back event
-                const backButton = document.querySelector('.back-btn');
-                backButton.addEventListener('click', () => {
-                    ui.hideButtons();
-                })
-
-            }
-
-
-        })
-    })
-});
+// Update Items Event
+const updateButton = document.querySelector('.update-meal-btn');
+updateButton.addEventListener('click', () => {
+    const ui = new UI();
+    ui.updateItem(id);
+    
+})
 
 const clearAll = document.querySelector('.clear-all');
 clearAll.addEventListener('click', () => {
