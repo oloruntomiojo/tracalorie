@@ -148,6 +148,18 @@ UI.prototype = {
         addButton.style.display = 'block';
     },
 
-    clearAllMeals: function () {  }
+    clearAllMeals: function () {
+        let listItems = document.querySelector('.overview');
+
+        listItems = [...listItems.children];
+
+        listItems.forEach(item => {
+            item.remove();
+        })
+
+        let totalCalories = document.querySelector('.total-calories');
+
+        totalCalories.textContent = '0';
+    }
 
 }

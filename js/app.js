@@ -44,6 +44,12 @@ addMeal.addEventListener('click', () => {
     })
 });
 
+const clearAll = document.querySelector('.clear-all');
+clearAll.addEventListener('click', () => {
+    const ui = new UI;
+    ui.clearAllMeals();
+})
+
 function addMealEvent() {
     const meal = document.getElementById('meal').value;
     const calories = document.getElementById('calories').value;
