@@ -17,16 +17,24 @@ addMeal.addEventListener('click', () => {
 
                 const id = ui.editItem(e.target);
 
+                // update meal event
                 const updateButton = document.querySelector('.update-meal-btn');
                 updateButton.addEventListener('click', () => {
                     ui.hideButtons();
                     ui.updateItem(id);
                 })
                 
+                // delete meal event
                 const deleteButton = document.querySelector('.delete-meal-btn');
                 deleteButton.addEventListener('click', () => {
                     ui.hideButtons();
                     ui.deleteItems(id);
+                })
+
+                // back event
+                const backButton = document.querySelector('.back-btn');
+                backButton.addEventListener('click', () => {
+                    ui.hideButtons();
                 })
 
             }

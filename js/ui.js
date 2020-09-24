@@ -148,4 +148,6 @@ UI.prototype = {
         addButton.style.display = 'block';
     },
 
+    clearAllMeals: function () {  }
+
 }
