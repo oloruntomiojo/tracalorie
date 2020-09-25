@@ -1,16 +1,15 @@
-const UI = function (meal, calories) {
-    this.meal = meal;
-    this.calories = calories;
+const UI = function () {
+
 }
 
 UI.prototype = {
     // Display all data
-    displayCaloriesInfo: function (id) {
+    displayCaloriesInfo: function (caloriesInfo) {
         let overview = document.querySelector('.overview');
 
         // append calories information
         overview.innerHTML += `
-                <li id="item-${id}"><strong>${this.meal}</strong> : <em>${this.calories} Calories</em> <a href="#"><i class="fa fa-pencil edit-item"></i></a></li>`;
+                <li id="item-${caloriesInfo.id}"><strong>${caloriesInfo.meal}</strong> : <em>${Number(caloriesInfo.calories)} Calories</em> <a href="#"><i class="fa fa-pencil edit-item"></i></a></li>`;
     },
 
     // Clear form fields
@@ -65,19 +64,24 @@ UI.prototype = {
         listItems = [...listItems.children];
 
         listItems.forEach(item => {
-            if(item.getAttribute('id') === id) {
+            if (item.getAttribute('id') === id) {
                 // update total calories
                 let totalCalories = document.querySelector('.total-calories');
                 totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent) + parseInt(calories);
 
                 // update  values in list
                 item.firstElementChild.textContent = meal;
+
                 item.firstElementChild.nextElementSibling.textContent = `${calories} Calories`;
 
                 this.hideButtons();
                 this.clearInputFields();
             }
         })
+        return { 
+            updatedMeal: meal,
+            updatedCalories: calories
+        }
     },
 
     deleteItems: function (id) {
