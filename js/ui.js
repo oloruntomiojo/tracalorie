@@ -1,36 +1,24 @@
 const UI = function () {
-
+    this.mealInput = document.getElementById('meal');
+    this.caloriesInput = document.getElementById('calories');
+    this.listItems = document.querySelector('.overview');
+    this.totalCalories = document.querySelector('.total-calories');
 }
 
 UI.prototype = {
     // Display all data
     displayCaloriesInfo: function (caloriesInfo) {
-        let overview = document.querySelector('.overview');
-
         // append calories information
-        overview.innerHTML += `
+        this.listItems.innerHTML += `
                 <li id="item-${caloriesInfo.id}"><strong>${caloriesInfo.meal}</strong> : <em>${Number(caloriesInfo.calories)} Calories</em> <a href="#"><i class="fa fa-pencil edit-item"></i></a></li>`;
-    },
-
-    // Clear form fields
-    clearInputFields: function () {
-        let meal = document.getElementById('meal').value = '',
-            calories = document.getElementById('calories').value = '';
     },
 
     // Sum all calories inputed
     caloriesCount: function (calories) {
-        let totalCalories = document.querySelector('.total-calories');
-        let initialCalories = parseInt(totalCalories.textContent);
+        let initialCalories = parseInt(this.totalCalories.textContent);
         initialCalories += parseInt(calories);
 
-        totalCalories.textContent = initialCalories;
-    },
-
-    showAlert: function (className, message) {
-        const errorAlert = document.querySelector('.alert');
-        errorAlert.className = `alert ${className}`;
-        errorAlert.textContent = message;
+        this.totalCalories.textContent = initialCalories;
     },
 
     editItem: function (target) {
@@ -42,10 +30,8 @@ UI.prototype = {
             mealToEdit = mealToEdit.textContent;
 
             // display the values in the input fields
-            let meal = document.getElementById('meal');
-            meal.value = mealToEdit;
-            let calories = document.getElementById('calories');
-            calories.value = parseInt(caloriesToEdit);
+            this.mealInput.value = mealToEdit;
+            this.caloriesInput.value = parseInt(caloriesToEdit);
 
             const formBtns = document.querySelector('.form-btn');
             formBtns.classList.add('show', 'hide');
@@ -57,51 +43,66 @@ UI.prototype = {
     },
 
     updateItem: function (id) {
-        let meal = document.getElementById('meal').value;
-        let calories = document.getElementById('calories').value;
+        let meal = this.mealInput.value;
+        let calories = this.caloriesInput.value;
 
-        let listItems = document.querySelector('.overview');
-        listItems = [...listItems.children];
+        this.listItems = [...this.listItems.children];
 
-        listItems.forEach(item => {
+        this.listItems.forEach(item => {
             if (item.getAttribute('id') === id) {
-                // update total calories
-                let totalCalories = document.querySelector('.total-calories');
-                totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent) + parseInt(calories);
+                // check if fields are empty
+                if (meal !== '' && calories !== '') {
+                    // update total calories
+                    this.totalCalories.textContent = parseInt(this.totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent) + parseInt(calories);
 
-                // update  values in list
-                item.firstElementChild.textContent = meal;
+                    // update  values in list
+                    item.firstElementChild.textContent = meal;
 
-                item.firstElementChild.nextElementSibling.textContent = `${calories} Calories`;
+                    item.firstElementChild.nextElementSibling.textContent = `${calories} Calories`;
 
-                this.hideButtons();
-                this.clearInputFields();
+                    this.hideButtons();
+                    this.clearInputFields();
+                } else {
+                    this.showAlert('error', 'Please fill all fields');
+                }
             }
         })
-        return { 
+        return {
             updatedMeal: meal,
             updatedCalories: calories
         }
     },
 
     deleteItems: function (id) {
-        let listItems = document.querySelector('.overview');
+        this.listItems = [...this.listItems.children];
 
-        listItems = [...listItems.children];
-
-        listItems.forEach(item => {
+        this.listItems.forEach(item => {
             if (item.getAttribute('id') === id) {
-                // update total calories
-                let totalCalories = document.querySelector('.total-calories');
-                totalCalories.textContent = parseInt(totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent);
+                if (this.mealInput.value !== '' && this.caloriesInput.value !== '') {
+                    // update total calories
+                    this.totalCalories.textContent = parseInt(this.totalCalories.textContent) - parseInt(item.firstElementChild.nextElementSibling.textContent);
 
-                // delete meal item;
-                item.remove();
+                    // delete meal item;
+                    item.remove();
 
-                this.clearInputFields();
-                this.hideButtons();
+                    this.clearInputFields();
+                    this.hideButtons();
+                } else {
+                    this.showAlert('error', 'Cannot delete Empty field(s)');
+                }
             }
         })
+    },
+
+    // Clear form fields
+    clearInputFields: function () {
+        this.mealInput.value = '',
+        this.caloriesInput.value = '';
+    },
+
+    clearAllMeals: function () {
+        this.listItems.innerHTML = "";
+        this.totalCalories.textContent = "0";
     },
 
     hideButtons: function () {
@@ -109,18 +110,19 @@ UI.prototype = {
         formBtns.classList.remove('show', 'hide');
     },
 
-    clearAllMeals: function () {
-        let listItems = document.querySelector('.overview');
+    showAlert: function (className, message) {
+        const errorAlert = document.querySelector('.alert');
+        errorAlert.className = `alert ${className}`;
+        errorAlert.textContent = message;
 
-        listItems = [...listItems.children];
+        setTimeout(() => {
+            this.removeError(className)
+        }, 2000);
+    },
 
-        listItems.forEach(item => {
-            item.remove();
-        })
-
-        let totalCalories = document.querySelector('.total-calories');
-
-        totalCalories.textContent = '0';
-    }
-
+    removeError: function (className) {
+        const alertMessage = document.querySelector('.alert');
+        alertMessage.textContent = "";
+        alertMessage.classList.remove(className);
+    },
 }
