@@ -15,6 +15,9 @@ function randomID() {
 const storage = new Storage();
 storage.displayItems();
 
+const totalCalories = document.querySelector('.total-calories').textContent;
+
+
 // Add Meal Event
 const addMeal = document.querySelector('.add-meal-btn');
 addMeal.addEventListener('click', addMealEvent);
@@ -32,10 +35,10 @@ listItems.addEventListener('click', (e) => {
 const updateButton = document.querySelector('.update-meal-btn');
 updateButton.addEventListener('click', () => {
     const ui = new UI();
+    // update UI
     const update = ui.updateItem(listID);
-    console.log(update);
-    // updateMeal();
-    // ui.updateItem(listID);
+    
+    // update LS
     storage.updateItem(listID, update);
 })
 
@@ -45,6 +48,7 @@ deleteButton.addEventListener('click', () => {
     const ui = new UI();
     ui.deleteItems(listID);
 
+    // delete from LS
     storage.deleteItems(listID);
 })
 
@@ -69,7 +73,7 @@ function addMealEvent() {
     let id = randomID();
 
     // Init CaloriesInfo Constructor
-    const info = new CaloriesInfo(meal, calories, id);
+    const info = new CaloriesInfo(id, meal, calories, totalCalories);
     console.log(info);
 
     // Init UI constructor

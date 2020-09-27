@@ -1,6 +1,6 @@
-const CaloriesInfo = function (meal, calories, id) {
+const CaloriesInfo = function (id, meal, calories) {
+    this.id = id;
     this.meal = meal;
     this.calories = calories;
-    this.id = id;
 }
 
