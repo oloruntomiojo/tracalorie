@@ -1,3 +1,4 @@
+// generate random number
 function randomID() {
     let overview = document.querySelector('.overview');
     let listItems = [...overview.children];
@@ -16,7 +17,6 @@ const storage = new Storage();
 storage.displayItems();
 
 const totalCalories = document.querySelector('.total-calories').textContent;
-
 
 // Add Meal Event
 const addMeal = document.querySelector('.add-meal-btn');
@@ -65,6 +65,9 @@ const clearAll = document.querySelector('.clear-all');
 clearAll.addEventListener('click', () => {
     const ui = new UI;
     ui.clearAllMeals();
+
+    // Clear data from LS
+    storage.clearAllItems();
 })
 
 function addMealEvent() {
@@ -89,5 +92,3 @@ function addMealEvent() {
         storage.saveItem(info);
     }
 }
-
-

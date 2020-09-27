@@ -83,5 +83,17 @@ Storage.prototype = {
         //   update local storage
         localStorage.setItem('caloriesInfo', JSON.stringify(items));
         localStorage.setItem('totalCalories', totalCalories);
-    }
+    },
+
+    clearAllItems: function () { 
+        let items = this.retrieveItem().caloriesInfo;
+        let totalCalories = document.querySelector('.total-calories').textContent;
+
+        items = [];
+        totalCalories = 0;
+
+        // update LS
+        localStorage.setItem('caloriesInfo', JSON.stringify(items));
+        localStorage.setItem('totalCalories', totalCalories);
+     }
 }
